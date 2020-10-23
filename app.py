@@ -1,21 +1,22 @@
 import os
 from flask import Flask, jsonify, request
 
-app = Flask(__name__)
+fibo = Flask(__name__)
 @app.route('/')
+
 def fibonacci():
-    i = 1
-    a, b = 1 , 1
-    val = [1,1]
+    p = 1
+    a = 0
+    r = "0,"
 
-    while i != 50:
-        c = a+b
-        a, b = b, c
-        val.append(c)        
-        i += 1
+    for i in range(51):
+        tmp = p
+        p = p + a
+        a = tmp
+        r += str(p) + ","
 
-    return val
+    return r
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(host='0.0.0.0', port=port)
